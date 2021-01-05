@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex};
 
 use super::task::Task;
 
+/// `Spawner` spawns new futures onto the task channel.
 #[derive(Clone)]
 pub struct Spawner {
     pub task_sender: SyncSender<Arc<Task>>,

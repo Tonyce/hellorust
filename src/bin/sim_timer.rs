@@ -2,6 +2,9 @@ use std::{sync::mpsc::sync_channel, time::Duration};
 
 use helloworld::timer::{Executor, Spawner, TimerFuture};
 
+// Maximum number of tasks to allow queueing in the channel at once.
+// This is just to make `sync_channel` happy, and wouldn't be present in
+// a real executor.
 fn new_executor_and_spawner() -> (Executor, Spawner) {
     const MAX_QUEUE_TASKS: usize = 10_000;
     let (task_sender, ready_queue) = sync_channel(MAX_QUEUE_TASKS);
