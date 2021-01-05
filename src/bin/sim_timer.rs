@@ -1,18 +1,6 @@
-#![allow(unused)]
-use std::{
-    future::Future,
-    sync::mpsc::{sync_channel, Receiver, SyncSender},
-    pin::Pin,
-    sync::{Arc, Mutex},
-    task::{Context, Poll, Waker},
-    thread,
-    time::Duration,
-};
+use std::{sync::mpsc::sync_channel, time::Duration};
 
-use futures::{future::{BoxFuture, FutureExt, select}, task::{waker_ref, ArcWake}};
-
-use helloworld::timer::{TimerFuture, Executor, Spawner};
-
+use helloworld::timer::{Executor, Spawner, TimerFuture};
 
 fn new_executor_and_spawner() -> (Executor, Spawner) {
     const MAX_QUEUE_TASKS: usize = 10_000;
@@ -20,11 +8,8 @@ fn new_executor_and_spawner() -> (Executor, Spawner) {
     (Executor { ready_queue }, Spawner { task_sender })
 }
 
-
-
-
 fn main() {
-    println!("timer");
+    println!("begin timer");
 
     let (executor, spawner) = new_executor_and_spawner();
 
